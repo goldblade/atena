@@ -7,6 +7,9 @@ import compression from "compression";
 require("./models/interaction");
 require("./models/user");
 require("./models/achievement");
+require("./models/achievementLevel");
+require("./models/achievementTemporary");
+require("./models/achievementTemporaryData");
 require("./models/ranking");
 require("./rocket/bot");
 
@@ -18,6 +21,8 @@ const mongooseConnectUri =
   process.env.NODE_ENV === "test"
     ? process.env.MONGODB_TEST_URI
     : process.env.MONGODB_URI;
+
+console.log(mongooseConnectUri);
 
 mongoose.connect(mongooseConnectUri);
 mongoose.set("useCreateIndexes", true);

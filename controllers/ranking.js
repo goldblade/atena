@@ -5,6 +5,7 @@ import interactionController from "./interaction";
 import { calculateLevel } from "../utils";
 import axios from "axios";
 import { renderScreen } from "../utils/ssr";
+import { validAtenaSecret } from "../utils/validSecret";
 
 const myPosition = async (user_id, users) => {
   const user = await userController.getNetwork(user_id);
@@ -293,7 +294,6 @@ const index = async (req, res) => {
         process.env.ROCKET_HOST
       }/api/v1/users.getAvatar?userId=${user.user}`
     }));
-
     first_users = users.slice(0, 3);
     last_users = users.slice(3, 20);
     const first = first_users[0];
@@ -313,6 +313,22 @@ const index = async (req, res) => {
   renderScreen(res, "Ranking", initialData);
 };
 
+const indexTeam = async (req, res) => {
+  validAtenaSecret(req, res);
+  let month = new Date(Date.now()).getMonth();
+  let monthName = monthNames[month];
+  if (req.params.month && (await valid_month(req.params.month))) {
+    month = req.params.month;
+    monthName = monthNames[month - 1];
+  } else {
+    month += 1;
+  }
+  let allUsers = await userController.findAll(false, 0);
+  console.log(allUsers);
+
+  res.send("oie");
+};
+
 export default {
   bot_index,
   index,
@@ -321,5 +337,6 @@ export default {
   findAll,
   myPosition,
   save,
-  sendToChannel
+  sendToChannel,
+  indexTeam
 };

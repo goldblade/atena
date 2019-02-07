@@ -103,3 +103,9 @@ Todos os comentários e sugestões são bem-vindas e podem ser feitas via Issues
 ## License
 
 Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.md](LICENSE.md) para obter detalhes.
+
+
+### Gerando um secret para o Atena
+
+const buf = crypto.randomBytes(48);
+console.log(`${buf.length} bytes of random data: ${buf.toString("hex")}`);

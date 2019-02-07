@@ -33,4 +33,16 @@ const validSlackSecret = (req, res) => {
   }
 };
 
+const atenaSecret = process.env.ATENA_SECRET;
+export const validAtenaSecret = (req, res) => {
+  const atenaSignature = req.headers["x-atena-signature"];
+  const sigBaseString = `v0:${atenaSecret}`;
+  const hmac = crypto
+    .createHmac("sha256", atenaSecret)
+    .update(sigBaseString, "utf-8")
+    .digest("hex");
+  const mySignature = `v0=${hmac}`;
+  console.log(mySignature);
+};
+
 export default validSlackSecret;

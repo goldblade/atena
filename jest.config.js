@@ -1,4 +1,14 @@
 module.exports = {
-  testEnvironment: "node",
-  transformIgnorePatterns: ["node_modules/?!(react-icons)"]
+  verbose: true,
+  watchPathIgnorePatterns: [
+    "calculateReactions",
+    "reactions",
+    "interaction",
+    "userLevelHistory",
+    "user",
+    "disqus"
+  ],
+  globalSetup: "./setup.js",
+  globalTeardown: "./teardown.js",
+  testEnvironment: "./mongo-environment.js"
 };

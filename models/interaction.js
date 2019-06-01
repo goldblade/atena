@@ -55,6 +55,10 @@ const interactionSchema = new mongoose.Schema({
   score: {
     type: Number,
     default: 0
+  },
+  reactions: {
+    type: mongoose.Schema.Types.Mixed,
+    required: false
   }
 });
 

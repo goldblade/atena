@@ -9,7 +9,8 @@ const normalize = data => {
     category: config.categories.network.type,
     channel: data.rid,
     date: dateMessage,
-    type: exportFunctions.type(data)
+    type: exportFunctions.type(data),
+    messageIdentifier: data._id
   };
   if (data.reactions) {
     const reactions = data.reactions;
@@ -21,6 +22,7 @@ const normalize = data => {
       action: config.actions.reaction.type,
       score: config.xprules.reactions.send
     };
+    console.log(data.reactions, "<<<<<<<<<<<<<<<<<<<", response);
   } else {
     if (data.attachments) {
       data.msg = "attachment";
